@@ -8,15 +8,22 @@ iOS framework that enables detecting and handling voice commands using microphon
 * Works without Siri integration. So, users don't have to say "Hey Siri" to detect commands. It's a 100% free style detection.
 * Very simple to configure and use.
 
-# How to use?
+# Prerequisites
+* macOS Big Sur, or later
+* Xcode 12.3+
+* iPhone device with iOS 14.3+
+
+# Install VoiceControlKit (using CocoaPods)
 1. Make sure you have CocoaPods installed.
-2. Update local pod repo using command "pod repo update" or "pod repo update trunk".
-3. Open Terminal from your project folder, and run commad "pod init".
-4. Add pod 'VoiceControlKit' inside Podfile, and run "pod install".
-5. Open Info.plist and add description for keys "NSSpeechRecognitionUsageDescription" and "NSMicrophoneUsageDescription".
-6. Use VoiceCommandListener and VoiceCommandListenerDelegate in your code.
-7. Test on a real iPhone device (not simulator).
-8. Make sure Siri is enabled on device from Settings, Siri & Search, Listen for "Hey Siri".
+2. Update local pod repo using command **<em>pod repo update</em>** or **<em>pod repo update trunk</em>**.
+3. Open Terminal from your project folder, and run commad **<em>pod init</em>**.
+4. Add **<em>pod 'VoiceControlKit'</em>** inside Podfile, and run **<em>pod install</em>**.
+
+# Configure iOS Project
+1. Open **<em>Info.plist</em>** and add description for keys **<em>NSSpeechRecognitionUsageDescription</em>** and <em>**NSMicrophoneUsageDescription</em>**.
+2. Use **VoiceCommandListener** and **VoiceCommandListenerDelegate** in your code (see below example) to detect and handle voice commands.
+3. Test on a real iPhone device (not simulator).
+4. Make sure Siri is enabled on iPhone device from Settings, Siri & Search, Listen for "Hey Siri".
 
 # Code Example:
 
