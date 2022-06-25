@@ -5,8 +5,6 @@
 //  Created by Ahmed Abdelkarim on 25/06/2022.
 //
 
-import Foundation
-import AVFoundation
 import Speech
 
 public class VoiceCommandListener {
