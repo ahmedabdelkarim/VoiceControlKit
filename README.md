@@ -5,7 +5,7 @@ iOS framework that enables detecting and handling voice commands using microphon
 * Detects commands of single word, and sentences ("Open", "Show first item details").
 * Can work both online and offline, with extremely fast response time (< 0.5 second).
 * Ability to use different set of commands for each screen.
-* Works without Siri integration. So, users don't have to say "Hey Siri" to detect commands. It's a 100% free style detection.
+* Works without Siri integration. So, users don't have to say "Hey Siri" to detect commands (100% free style detection).
 * Very simple to configure and use.
 * Low Memory Footprint (~0.3MBs)
 * Low CPU consumption (~2% without speech, ~3% while speeking) [% of single core not all processor cores]
