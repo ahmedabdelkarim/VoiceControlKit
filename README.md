@@ -49,7 +49,7 @@ class ViewController: UIViewController, VoiceCommandListenerDelegate {
         VoiceCommandListener.shared.delegate = self
         
         VoiceCommandListener.shared.start(with: commands, success: {
-            
+            // Now it's listening to voice commands
         }, failure: { error in
             print(error.localizedDescription)
         })
