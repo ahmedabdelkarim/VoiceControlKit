@@ -20,11 +20,11 @@ class ViewController: UIViewController, VoiceCommandListenerDelegate {
             VoiceCommand(text: "Hello"),
             VoiceCommand(text: "Open next page"),
             VoiceCommand(text: "Take photo"),
-            VoiceCommand(text: "Go back"),
+            VoiceCommand(text: "Go back")
         ]
         
         VoiceCommandListener.shared.delegate = self
-        //VoiceCommandListener.shared.onDeviceRecognitionOnly = false
+        
         VoiceCommandListener.shared.start(with: commands, success: {
             // Now it's listening to voice commands
         }, failure: { error in
