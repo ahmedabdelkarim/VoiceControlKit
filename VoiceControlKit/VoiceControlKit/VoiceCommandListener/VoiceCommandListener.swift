@@ -37,7 +37,7 @@ public class VoiceCommandListener {
     /// The minimum confidence to accept voice command.
     public var minimumAcceptableConfidence: Float = 0.8
     
-    /// Use only device offline recognition, and don't send voice over network for online recognition services. Offline recognition supports specific languages only, and won’t be as accurate as online services.
+    /// Use only device offline recognition, and don't send voice over network for online recognition services. Offline recognition supports specific languages only, and won’t be as accurate as online services. [Online recognition still in development, and not stable]
     public var onDeviceRecognitionOnly: Bool = true
     
     // MARK: - Private Properties
@@ -58,7 +58,7 @@ public class VoiceCommandListener {
         populateCommandsDictionary(with: commands)
         
         requestPermission(success: {
-            DispatchQueue(label: "Speech Recognizer Queue", qos: .background).async { [weak self] in
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 guard let self = self, let recognizer = self.recognizer, recognizer.isAvailable else {
                     failure(.recognizerIsUnavailable)
                     return
@@ -152,15 +152,13 @@ public class VoiceCommandListener {
     }
     
     private func recognitionHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        DispatchQueue.global().async {
+        DispatchQueue.global(qos: .userInteractive).async {
             let receivedFinalResult = result?.isFinal ?? false
             let receivedError = error != nil
             
             if receivedFinalResult || receivedError {
-                //print("stopped -> final result: \(receivedFinalResult) , error: \(receivedError)")
-                
                 if receivedError && result == nil {
-                    self.task?.cancel()
+                    // TODO: - Logging
                     return
                 }
                 
@@ -171,7 +169,8 @@ public class VoiceCommandListener {
                     self.request = request
                     self.task = self.recognizer!.recognitionTask(with: request, resultHandler: self.recognitionHandler(result:error:))
                 } catch {
-                    print("couldn't restart")
+                    // TODO: - Logging
+                    print("Couldn't restart voice command recognition")
                 }
             }
             else if let result = result {
@@ -198,7 +197,6 @@ public class VoiceCommandListener {
         
         // check for sentences
         let bestTranscriptionText = bestTranscription.formattedString.lowercased()
-        //print("transcript: \(bestTranscriptionText)\nconfidence: \(confidence)")
         lookForSentences(in: bestTranscriptionText, withConfidence: confidence)
     }
     
@@ -240,22 +238,10 @@ public class VoiceCommandListener {
     }
     
     private func lookForSentences(in transcription: String, withConfidence confidence: Float) {
-        guard let sentenceCommandsDictionary = self.sentenceCommandsDictionary else {
-            return
-        }
-        
-        let keys = [String](sentenceCommandsDictionary.keys)
-        
         if onDeviceRecognitionOnly {
             if acceptsFirstRecognition {
                 if confidence == 0 {
-                    for key in keys {
-                        if transcription.hasSuffix(key) {
-                            if let command = sentenceCommandsDictionary[key] {
-                                delegate?.voiceCommandListener(self, detected: command)
-                            }
-                        }
-                    }
+                    callDelegateForExistingSentence(in: transcription)
                 }
             }
             else {
@@ -263,13 +249,7 @@ public class VoiceCommandListener {
                     return
                 }
                 
-                for key in keys {
-                    if transcription.hasSuffix(key) {
-                        if let command = sentenceCommandsDictionary[key] {
-                            delegate?.voiceCommandListener(self, detected: command)
-                        }
-                    }
-                }
+                callDelegateForExistingSentence(in: transcription)
             }
         }
         else {
@@ -277,13 +257,7 @@ public class VoiceCommandListener {
                 if !choosingFirstRecognition {
                     choosingFirstRecognition = true
                     
-                    for key in keys {
-                        if transcription.hasSuffix(key) {
-                            if let command = sentenceCommandsDictionary[key] {
-                                delegate?.voiceCommandListener(self, detected: command)
-                            }
-                        }
-                    }
+                    callDelegateForExistingSentence(in: transcription)
                     
                     DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
                         self?.choosingFirstRecognition = false
@@ -295,12 +269,22 @@ public class VoiceCommandListener {
                     return
                 }
                 
-                for key in keys {
-                    if transcription.hasSuffix(key) {
-                        if let command = sentenceCommandsDictionary[key] {
-                            delegate?.voiceCommandListener(self, detected: command)
-                        }
-                    }
+                callDelegateForExistingSentence(in: transcription)
+            }
+        }
+    }
+    
+    private func callDelegateForExistingSentence(in transcription: String) {
+        guard let sentenceCommandsDictionary = self.sentenceCommandsDictionary else {
+            return
+        }
+        
+        let sentences = [String](sentenceCommandsDictionary.keys)
+        
+        for sentence in sentences {
+            if transcription.hasSuffix(sentence) {
+                if let command = sentenceCommandsDictionary[sentence] {
+                    delegate?.voiceCommandListener(self, detected: command)
                 }
             }
         }
