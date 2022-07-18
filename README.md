@@ -28,7 +28,7 @@ iOS framework that enables detecting and handling voice commands using microphon
 4. Make sure Siri is enabled on iPhone device from Settings, Siri & Search, Listen for "Hey Siri".
 
 # Code Example
-
+    ```swift
     import UIKit
     import VoiceControlKit
 
@@ -65,3 +65,4 @@ iOS framework that enables detecting and handling voice commands using microphon
             }
         }
     }
+    ```
