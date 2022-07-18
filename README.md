@@ -7,6 +7,8 @@ iOS framework that enables detecting and handling voice commands using microphon
 * Ability to use different set of commands for each screen.
 * Works without Siri integration. So, users don't have to say "Hey Siri" to detect commands. It's a 100% free style detection.
 * Very simple to configure and use.
+* Low Memory Footprint (~0.3MBs)
+* Low CPU consumption (~2% without speech, ~3% while speeking) [% of single core not all processor cores]
 
 # Prerequisites
 * macOS Big Sur, or later
