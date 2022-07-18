@@ -28,41 +28,41 @@ iOS framework that enables detecting and handling voice commands using microphon
 4. Make sure Siri is enabled on iPhone device from Settings, Siri & Search, Listen for "Hey Siri".
 
 # Code Example
-    ```swift
-    import UIKit
-    import VoiceControlKit
+```swift
+import UIKit
+import VoiceControlKit
 
-    class ViewController: UIViewController, VoiceCommandListenerDelegate {
-        // MARK: - Outlets
-        @IBOutlet weak var label: UILabel!
+class ViewController: UIViewController, VoiceCommandListenerDelegate {
+    // MARK: - Outlets
+    @IBOutlet weak var label: UILabel!
     
-        // MARK: - Lifecycle
-        override func viewDidLoad() {
-            super.viewDidLoad()
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-            let commands = [
-                VoiceCommand(text: "Hello"),
-                VoiceCommand(text: "Hi"),
-                VoiceCommand(text: "How are you"),
-            ]
+        let commands = [
+            VoiceCommand(text: "Hello"),
+            VoiceCommand(text: "Hi"),
+            VoiceCommand(text: "How are you"),
+        ]
         
-            VoiceCommandListener.shared.delegate = self
+        VoiceCommandListener.shared.delegate = self
         
-            VoiceCommandListener.shared.start(with: commands, success: {
+        VoiceCommandListener.shared.start(with: commands, success: {
             
-            }, failure: { error in
-                print(error.localizedDescription)
-            })
-        }
+        }, failure: { error in
+            print(error.localizedDescription)
+        })
+    }
     
-        // MARK: - VoiceCommandListenerDelegate
-        func voiceCommandListener(_ listener: VoiceCommandListener, detected command: VoiceCommand) {
+    // MARK: - VoiceCommandListenerDelegate
+    func voiceCommandListener(_ listener: VoiceCommandListener, detected command: VoiceCommand) {
         
-            // Do whatever you want depending on detected command
-        
-            DispatchQueue.main.async {
-                self.label.text = command.text
-            }
+        // Do whatever you want depending on detected command
+    
+        DispatchQueue.main.async {
+            self.label.text = command.text
         }
     }
-    ```
+}
+```
