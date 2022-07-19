@@ -1,5 +1,5 @@
 PODS:
-  - VoiceControlKit (1.0)
+  - VoiceControlKit (1.1)
 
 DEPENDENCIES:
   - VoiceControlKit
@@ -9,8 +9,8 @@ SPEC REPOS:
     - VoiceControlKit
 
 SPEC CHECKSUMS:
-  VoiceControlKit: ce5628913e60c4ccc5741d99aa5eaa01fca02a68
+  VoiceControlKit: e6775a9635b56f023baac9c52d035d0c3a1ff299
 
 PODFILE CHECKSUM: 00efe8951fdd4eb43ab351d1bfa6d85150707fad
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.3

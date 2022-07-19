@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "VoiceControlKit"
-  spec.version      = "1.0"
+  spec.version      = "1.1"
   spec.summary      = "iOS framework that enables detecting and handling voice commands using microphone."
   spec.description  = "iOS framework that enables detecting and handling voice commands using microphone. Build using Swift, and supports online and offline speech recognition."
   spec.homepage     = "https://github.com/ahmedabdelkarim/VoiceControlKit"
