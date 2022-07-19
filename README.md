@@ -44,7 +44,8 @@ class ViewController: UIViewController, VoiceCommandListenerDelegate {
             VoiceCommand(text: "Hello"),
             VoiceCommand(text: "Open next page"),
             VoiceCommand(text: "Take photo"),
-            VoiceCommand(text: "Go back")
+            VoiceCommand(text: "Go back"),
+            VoiceCommand(text: "Close app")
         ]
         
         VoiceCommandListener.shared.delegate = self
