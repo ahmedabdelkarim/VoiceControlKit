@@ -93,4 +93,5 @@ Example/Example.xcworkspace
 Example/Podfile.lock
 Example/Pods/
 Example/xcuserdata/
+Example/xcshareddata/
 
