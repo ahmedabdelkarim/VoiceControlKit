@@ -2,7 +2,7 @@
 iOS framework that enables detecting and handling voice commands using microphone. Built using Swift with minumum target iOS 14.3.
 
 # Features
-* Detects commands of single word, and sentences ("Open", "Show first item details").
+* Detects commands of single word ("Open", "Close"), and sentences ("Show first item details", "Go back").
 * Can work both online and offline, with extremely fast response time (< 0.5 second).
 * Ability to use different set of commands for each screen.
 * Works without Siri integration. So, users don't have to say "Hey Siri" to detect commands (100% free style detection).
