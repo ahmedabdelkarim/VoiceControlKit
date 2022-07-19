@@ -92,6 +92,6 @@ iOSInjectionProject/
 Example/Example.xcworkspace
 Example/Podfile.lock
 Example/Pods/
-Example/xcuserdata/
-Example/xcshareddata/
+Example/Example.xcodeproj/xcuserdata/
+Example/Example.xcodeproj/xcshareddata/
 
