@@ -1,8 +1,13 @@
 # VoiceControlKit
 iOS framework that enables detecting and handling voice commands using microphone. Built using Swift with minumum target iOS 14.3.
 
+[![license](https://img.shields.io/badge/license-MIT-black)](https://github.com/ahmedabdelkarim/VoiceControlKit)
+[![Xcode Version](https://img.shields.io/badge/Xcode-12.3%2B-blue)](https://github.com/ahmedabdelkarim/VoiceControlKit)
+[![iOS Version](https://img.shields.io/badge/iOS-14.3%2B-blue)](https://github.com/ahmedabdelkarim/VoiceControlKit)
+[![Swift Version](https://img.shields.io/badge/Swift-5.0%2B-orange)](https://github.com/ahmedabdelkarim/VoiceControlKit)
+
 # Features
-* Detects commands of single word, and sentences ("Open", "Show first item details").
+* Detects commands of single word ("Open", "Close"), and sentences ("Show first item details", "Go back").
 * Can work both online and offline, with extremely fast response time (< 0.5 second).
 * Ability to use different set of commands for each screen.
 * Works without Siri integration. So, users don't have to say "Hey Siri" to detect commands (100% free style detection).
@@ -44,7 +49,8 @@ class ViewController: UIViewController, VoiceCommandListenerDelegate {
             VoiceCommand(text: "Hello"),
             VoiceCommand(text: "Open next page"),
             VoiceCommand(text: "Take photo"),
-            VoiceCommand(text: "Go back")
+            VoiceCommand(text: "Go back"),
+            VoiceCommand(text: "Close app")
         ]
         
         VoiceCommandListener.shared.delegate = self
