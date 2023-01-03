@@ -113,7 +113,16 @@ public class VoiceCommandListener {
                 case .authorized:
                     AVAudioSession.sharedInstance().requestRecordPermission { granted in
                         if granted {
-                            success()
+                            do {
+                                // handle when other app using microphone currently
+                                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, options: .mixWithOthers)
+                                try AVAudioSession.sharedInstance().setActive(true)
+                                
+                                success()
+                            }
+                            catch {
+                                failure(.notPermittedToRecord)
+                            }
                         }
                         else {
                             failure(.notPermittedToRecord)
